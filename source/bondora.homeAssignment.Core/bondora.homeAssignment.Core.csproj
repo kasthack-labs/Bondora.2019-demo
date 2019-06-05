@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Services\Contracts\" />
+    <Folder Include="Services\Impl\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="../bondora.homeAssignment.Models/bondora.homeAssignment.Models.csproj"/>
+  </ItemGroup>
+</Project>

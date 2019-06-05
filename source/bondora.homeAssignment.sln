@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28917.182
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bondora.homeAssignment.Web", "bondora.homeAssignment.Web\bondora.homeAssignment.Web.csproj", "{34357B01-17AE-48A6-8E7C-64229DF76A2B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bondora.homeAssignment.Service", "bondora.homeAssignment.Service\bondora.homeAssignment.Service.csproj", "{02C2EDDE-5661-4FFB-ACBC-66C1D4F8BB72}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bondora.homeAssignment.Data", "bondora.homeAssignment.Data\bondora.homeAssignment.Data.csproj", "{DCB81A0B-35AF-4C35-9782-A32D1E1081C4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bondora.homeAssignment.Models", "bondora.homeAssignment.Models\bondora.homeAssignment.Models.csproj", "{E34996E3-8D21-4FBD-812E-458FF7C8FFB3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bondora.homeAssignment.Core", "bondora.homeAssignment.Core\bondora.homeAssignment.Core.csproj", "{DE0E67DE-406F-443E-A81C-C2E85D00E871}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bondora.homeAssignment.Core.Test", "bondora.homeAssignment.Core.Test\bondora.homeAssignment.Core.Test.csproj", "{F8D5559E-F20A-4A73-AF5B-2C5F330E897F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{34357B01-17AE-48A6-8E7C-64229DF76A2B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{34357B01-17AE-48A6-8E7C-64229DF76A2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{34357B01-17AE-48A6-8E7C-64229DF76A2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{34357B01-17AE-48A6-8E7C-64229DF76A2B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{02C2EDDE-5661-4FFB-ACBC-66C1D4F8BB72}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{02C2EDDE-5661-4FFB-ACBC-66C1D4F8BB72}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{02C2EDDE-5661-4FFB-ACBC-66C1D4F8BB72}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{02C2EDDE-5661-4FFB-ACBC-66C1D4F8BB72}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DCB81A0B-35AF-4C35-9782-A32D1E1081C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DCB81A0B-35AF-4C35-9782-A32D1E1081C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DCB81A0B-35AF-4C35-9782-A32D1E1081C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DCB81A0B-35AF-4C35-9782-A32D1E1081C4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E34996E3-8D21-4FBD-812E-458FF7C8FFB3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E34996E3-8D21-4FBD-812E-458FF7C8FFB3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E34996E3-8D21-4FBD-812E-458FF7C8FFB3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E34996E3-8D21-4FBD-812E-458FF7C8FFB3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DE0E67DE-406F-443E-A81C-C2E85D00E871}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE0E67DE-406F-443E-A81C-C2E85D00E871}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE0E67DE-406F-443E-A81C-C2E85D00E871}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE0E67DE-406F-443E-A81C-C2E85D00E871}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F8D5559E-F20A-4A73-AF5B-2C5F330E897F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F8D5559E-F20A-4A73-AF5B-2C5F330E897F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F8D5559E-F20A-4A73-AF5B-2C5F330E897F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F8D5559E-F20A-4A73-AF5B-2C5F330E897F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {07636A62-FFD1-4711-B24C-A8D79283B459}
+	EndGlobalSection
+EndGlobal
