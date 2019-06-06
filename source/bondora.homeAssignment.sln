@@ -15,7 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "bondora.homeAssignment.Core
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bondora.homeAssignment.Core.Test", "bondora.homeAssignment.Core.Test\bondora.homeAssignment.Core.Test.csproj", "{F8D5559E-F20A-4A73-AF5B-2C5F330E897F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bondora.homeAssignment.Api", "bondora.homeAssignment.Api\bondora.homeAssignment.Api.csproj", "{DF9E017E-1C5E-45DA-A59A-5B9676F774B1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "bondora.homeAssignment.Api", "bondora.homeAssignment.Api\bondora.homeAssignment.Api.csproj", "{DF9E017E-1C5E-45DA-A59A-5B9676F774B1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

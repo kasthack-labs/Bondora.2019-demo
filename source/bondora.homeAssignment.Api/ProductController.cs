@@ -1,5 +1,4 @@
 ﻿using bondora.homeAssignment.Core.Services.Contracts;
-using bondora.homeAssignment.Models;
 using bondora.homeAssignment.Models.DTO;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;

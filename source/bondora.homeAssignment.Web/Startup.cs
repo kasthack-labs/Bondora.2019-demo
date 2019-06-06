@@ -34,7 +34,9 @@ namespace bondora.homeAssignment.Web
 
             services
                 .AddTransient<IProductsService, ProductsService>()
-                .AddTransient<ICategoryService, CategoryService>();
+                .AddTransient<ICategoryService, CategoryService>()
+                .AddTransient<IUserIdProvider, MockUserIdProvider>()
+                .AddTransient<ICartService, CartService>();
 
             services
                 .AddDbContext<DemoAppContext>()

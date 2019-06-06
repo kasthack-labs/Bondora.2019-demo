@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using bondora.homeAssignment.Data;
 using bondora.homeAssignment.Models.DTO;
+using bondora.homeAssignment.Models.DTO.CartItem;
 
 namespace bondora.homeAssignment.Core
 {
@@ -11,6 +12,8 @@ namespace bondora.homeAssignment.Core
             this.CreateMap<Category, CategoryContract>().ReverseMap();
             this.CreateMap<Product, ProductContract>().ReverseMap();
             this.CreateMap<CartItem, CartItemContract>().ReverseMap();
+            this.CreateMap<CreateCartItemContract, CartItem>();
+            this.CreateMap<UpdateCartItemContract, CartItem>();
         }
     }
 }

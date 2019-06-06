@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using bondora.homeAssignment.Data;
 using bondora.homeAssignment.Core.Services.Contracts;
-using bondora.homeAssignment.Models;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using bondora.homeAssignment.Models.DTO;
