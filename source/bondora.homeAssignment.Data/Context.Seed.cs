@@ -2,7 +2,7 @@
 
 namespace bondora.homeAssignment.Data
 {
-    public partial class Context
+    public partial class DemoAppContext
     {
         private static void ConfigureSeedData(ModelBuilder modelBuilder)
         {
@@ -30,63 +30,63 @@ namespace bondora.homeAssignment.Data
                 }
             );
 
-            modelBuilder.Entity<BonusPoint>().HasData(
-                new BonusPoint
+            modelBuilder.Entity<LoyaltyProgram>().HasData(
+                new LoyaltyProgram
                 {
                     Id = 1,
                     Deleted = false,
                     Name = "Regular bonus program",
-                    Value = 1,
+                    Formula = "1",
                 },
-                new BonusPoint
-                {
-                    Id = 1,
-                    Deleted = false,
-                    Name = "Heavy equipment bonus program",
-                    Value = 2,
-                }
-            );
-
-            modelBuilder.Entity<ProductCategory>().HasData(
-                new ProductCategory
-                {
-                    Id = 1,
-                    Deleted = false,
-                    Name = "Heavy",
-                    PricingFormula = "OneTime + Premium * duration",
-                },
-                new ProductCategory
+                new LoyaltyProgram
                 {
                     Id = 2,
                     Deleted = false,
-                    Name = "Regular",
+                    Name = "Heavy equipment bonus program",
+                    Formula = "2",
+                }
+            );
+
+            modelBuilder.Entity<Category>().HasData(
+                new Category
+                {
+                    Id = 1,
+                    Deleted = false,
+                    Name = "Heavy equipment",
+                    PricingFormula = "OneTime + Premium * duration",
+                },
+                new Category
+                {
+                    Id = 2,
+                    Deleted = false,
+                    Name = "Regular equipment",
                     PricingFormula = "OneTime + min(duration, 2) * Premium + max(0, duration - 2) * Regular"
                 },
-                new ProductCategory
+                new Category
                 {
                     Id = 3,
                     Deleted = false,
-                    Name = "Specialized",
+                    Name = "Specialized equipment",
                     PricingFormula = "min(duration, 3) * Premium + max(0, duration - 3) * Regular"
                 }
             );
 
-            modelBuilder.Entity<CategoryBonusPoint>().HasData(
-                new CategoryBonusPoint
+            modelBuilder.Entity<CategoryLoyaltyProgram>().HasData(
+                new CategoryLoyaltyProgram
                 {
                     Id = 1,
                     Deleted = false,
                     BonusPointsId = 2,
                     ProductCategoryId = 1,
                 },
-                new CategoryBonusPoint
+                new CategoryLoyaltyProgram
                 {
                     Id = 2,
                     Deleted = false,
                     BonusPointsId = 1,
                     ProductCategoryId = 2,
                 },
-                new CategoryBonusPoint
+                new CategoryLoyaltyProgram
                 {
                     Id = 3,
                     Deleted = false,
@@ -100,36 +100,41 @@ namespace bondora.homeAssignment.Data
                 {
                     Id = 1,
                     Deleted = false,
-                    EquipmentTypeId = 1,
+                    CategoryId = 1,
                     Name = "Caterpillar bulldozer",
+                    Image = "https://i.imgur.com/XmUfJ41.png",
                 },
                 new Product
                 {
                     Id = 2,
                     Deleted = false,
-                    EquipmentTypeId = 2,
+                    CategoryId = 2,
                     Name = "KamAZ truck",
+                    Image = "https://i.imgur.com/8bP88dn.png"
                 },
                 new Product
                 {
                     Id = 3,
                     Deleted = false,
-                    EquipmentTypeId = 1,
+                    CategoryId = 1,
                     Name = "Komatsu crane",
+                    Image = "https://i.imgur.com/JUH91Xj.png",
                 },
                 new Product
                 {
                     Id = 4,
                     Deleted = false,
-                    EquipmentTypeId = 2,
+                    CategoryId = 2,
                     Name = "Volvo steamroller",
+                    Image = "https://i.imgur.com/um0dalY.png",
                 },
                 new Product
                 {
-                    Id = 2,
+                    Id = 5,
                     Deleted = false,
-                    EquipmentTypeId = 3,
+                    CategoryId = 3,
                     Name = "Bosch jackhammer",
+                    Image = "https://i.imgur.com/AilecFp.png",
                 }
             );
         }

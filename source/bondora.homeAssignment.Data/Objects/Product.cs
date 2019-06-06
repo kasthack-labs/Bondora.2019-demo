@@ -6,7 +6,8 @@
         public long Id { get; set; }
         public bool Deleted { get; set; }
         public string Name { get; set; }
-        public long EquipmentTypeId { get; set; }
-        public ProductCategory EquipmentType { get; set; }
+        public string Image { get; set; }
+        public long CategoryId { get; set; }
+        public Category Category { get; set; }
     }
 }

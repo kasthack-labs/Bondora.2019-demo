@@ -3,10 +3,11 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
   </PropertyGroup>
+
   <ItemGroup>
-    <ProjectReference Include="../bondora.homeAssignment.Models/bondora.homeAssignment.Models.csproj" />
+    <ProjectReference Include="..\bondora.homeAssignment.Core\bondora.homeAssignment.Core.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Jace" Version="0.9.3" />
+    <PackageReference Include="Microsoft.AspNetCore.App" />
   </ItemGroup>
 </Project>
