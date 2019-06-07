@@ -10,12 +10,9 @@ namespace bondora.homeAssignment.Web.Services
     {
         private readonly IInvoiceApi apiClient;
 
-        public RemoteInvoiceService(IInvoiceApi apiClient)
-        {
-            this.apiClient = apiClient;
-        }
+        public RemoteInvoiceService(IInvoiceApi apiClient) => this.apiClient = apiClient;
 
-        public async Task<InvoiceContract> GetInvoice() => await this.apiClient.ApiInvoiceGetInvoiceGetAsync();
-        public async Task<DocumentContract> GetPrintedInvoice() => await this.apiClient.ApiInvoiceGetPrintedInvoiceGetAsync();
+        public async Task<InvoiceContract> GetInvoice() => await this.apiClient.ApiInvoiceGetInvoiceGetAsync().ConfigureAwait(false);
+        public async Task<DocumentContract> GetPrintedInvoice() => null;// await this.apiClient.ApiInvoiceGetPrintedInvoiceGetAsync();
     }
 }

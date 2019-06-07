@@ -22,6 +22,7 @@ namespace bondora.homeAssignment.Api
 
         [HttpPost]
         public Task<CartItemContract> Update(UpdateCartItemContract contract) => this.cartService.Update(contract);
+
         [HttpGet]
         public Task<CartItemContract> Get(long id) => this.cartService.Get(id);
         [HttpGet]

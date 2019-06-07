@@ -16,6 +16,7 @@ namespace bondora.homeAssignment.Models.Contracts.Cart
 
         [Range(CartItemContract.MinDuration, CartItemContract.MaxDuration, ErrorMessage = CartItemContract.DurationMessage)]
         public int Duration { get; set; }
+
         public ProductContract Product { get; set; }
 
         public decimal Price { get; set; }

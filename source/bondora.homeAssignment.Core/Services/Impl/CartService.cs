@@ -33,8 +33,8 @@ namespace bondora.homeAssignment.Core.Services.Impl
         {
             using (var context = this.contextFactory())
             {
-                var item = await context.CartItems.Where(a => a.Id == id).ProjectTo<CartItemContract>(this.mapperConfiguration).FirstOrDefaultAsync();
-                await this.SetPrices(item);
+                var item = await context.CartItems.Where(a => a.Id == id).ProjectTo<CartItemContract>(this.mapperConfiguration).FirstOrDefaultAsync().ConfigureAwait(false);
+                await this.SetPrices(item).ConfigureAwait(false);
                 return item;
             }
         }
@@ -46,9 +46,10 @@ namespace bondora.homeAssignment.Core.Services.Impl
                 var items = await context
                     .CartItems
                     .ProjectTo<CartItemContract>(this.mapperConfiguration)
-                    .ToArrayAsync();
+                    .ToArrayAsync()
+                    .ConfigureAwait(false);
 
-                await this.SetPrices(items);
+                await this.SetPrices(items).ConfigureAwait(false);
 
                 return items;
             }
@@ -59,10 +60,10 @@ namespace bondora.homeAssignment.Core.Services.Impl
 
             using (var context = this.contextFactory())
             {
-                var item = await context.CartItems.FirstOrDefaultAsync(a => a.Id == id);
+                var item = await context.CartItems.FirstOrDefaultAsync(a => a.Id == id).ConfigureAwait(false);
                 if (item == null) return id;
                 item.Deleted = true;
-                await context.SaveChangesAsync();
+                await context.SaveChangesAsync().ConfigureAwait(false);
                 this.logger.LogDebug($"Deleted item #{item.Id} from cart");
                 return id;
             }
@@ -70,35 +71,33 @@ namespace bondora.homeAssignment.Core.Services.Impl
 
         public async Task<CartItemContract> Create(CreateCartItemContract contract)
         {
-
             using (var context = this.contextFactory())
             {
                 var item = this.mapper.Map<CartItem>(contract);
                 context.CartItems.Add(item);
-                await context.SaveChangesAsync();
+                await context.SaveChangesAsync().ConfigureAwait(false);
                 this.logger.LogDebug($"Added item #{item.Id} to cart");
-                return await this.Get(item.Id);
+                return await this.Get(item.Id).ConfigureAwait(false);
             }
         }
 
         public async Task<CartItemContract> Update(UpdateCartItemContract contract)
         {
-
             using (var context = this.contextFactory())
             {
-                var item = await context.CartItems.FirstOrDefaultAsync(a => a.Id == contract.Id);
+                var item = await context.CartItems.FirstOrDefaultAsync(a => a.Id == contract.Id).ConfigureAwait(false);
                 if (item == null) throw null;
                 this.mapper.Map(contract, item);
-                await context.SaveChangesAsync();
+                await context.SaveChangesAsync().ConfigureAwait(false);
                 this.logger.LogDebug($"Upated cart item #{item.Id}: changed {nameof(contract.Duration)} to {contract.Duration}");
-                return await this.Get(contract.Id);
+                return await this.Get(contract.Id).ConfigureAwait(false);
             }
         }
-        
+
         //todo: move to a separate service
         private async Task SetPrices(params CartItemContract[] cart)
         {
-            var variables = await this.priceService.GetPrices();
+            var variables = await this.priceService.GetPrices().ConfigureAwait(false);
             var engine = new Jace.CalculationEngine();
 
             foreach (var cartItem in cart)

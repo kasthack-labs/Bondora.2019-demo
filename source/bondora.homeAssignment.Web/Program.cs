@@ -4,16 +4,13 @@ using Microsoft.Extensions.Logging;
 
 namespace bondora.homeAssignment.Web
 {
-    public class Program
+    public static class Program
     {
-        public static void Main(string[] args)
-        {
-            CreateHostBuilder(args).Build().Run();
-        }
+        public static void Main(string[] args) => CreateHostBuilder(args).Build().Run();
 
         public static IHostBuilder CreateHostBuilder(string[] args) => Host
                 .CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder => webBuilder.UseStartup<Startup>().ConfigureKestrel(opts => opts.ListenAnyIP(31337)))
+                .ConfigureWebHostDefaults(webBuilder => webBuilder.UseStartup<Startup>())
                 .ConfigureLogging((hostingContext, logging) =>
                 {
                     logging.AddConsole();

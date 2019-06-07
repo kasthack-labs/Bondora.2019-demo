@@ -15,9 +15,9 @@ namespace bondora.homeAssignment.Api
         public ProductController(IProductsService productsService) => this.productsService = productsService;
 
         [HttpGet]
-        public async Task<IEnumerable<ProductContract>> GetProducts() => await this.productsService.List();
+        public async Task<IEnumerable<ProductContract>> GetProducts() => await this.productsService.List().ConfigureAwait(false);
 
         [HttpGet]
-        public async Task<ProductContract> GetProduct(long id) => await this.productsService.Get(id);
+        public async Task<ProductContract> GetProduct(long id) => await this.productsService.Get(id).ConfigureAwait(false);
     }
 }

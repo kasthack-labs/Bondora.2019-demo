@@ -8,14 +8,11 @@ namespace bondora.homeAssignment.Web.Controllers
     {
         private readonly IInvoiceService invoiceService;
 
-        public InvoicesController(IInvoiceService invoiceService)
-        {
-            this.invoiceService = invoiceService;
-        }
+        public InvoicesController(IInvoiceService invoiceService) => this.invoiceService = invoiceService;
 
         public async Task<ActionResult> Index()
         {
-            var invoice = await this.invoiceService.GetPrintedInvoice();
+            var invoice = await this.invoiceService.GetPrintedInvoice().ConfigureAwait(false);
             return this.File(invoice.Content, invoice.Mime, invoice.Name);
         }
     }

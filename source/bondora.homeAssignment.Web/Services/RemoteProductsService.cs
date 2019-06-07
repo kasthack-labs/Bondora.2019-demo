@@ -10,11 +10,8 @@ namespace bondora.homeAssignment.Web.Services
     {
         private readonly IProductApi apiClient;
 
-        public RemoteProductsService(IProductApi apiClient)
-        {
-            this.apiClient = apiClient;
-        }
-        public Task<ProductContract> Get(long id) => this.apiClient.ApiProductGetProductGetAsync(id);
-        public async Task<IEnumerable<ProductContract>> List() => await this.apiClient.ApiProductGetProductsGetAsync();
+        public RemoteProductsService(IProductApi apiClient) => this.apiClient = apiClient;
+        public async Task<ProductContract> Get(long id) => await this.apiClient.ApiProductGetProductGetAsync(id).ConfigureAwait(false);
+        public async Task<IEnumerable<ProductContract>> List() => await this.apiClient.ApiProductGetProductsGetAsync().ConfigureAwait(false);
     }
 }

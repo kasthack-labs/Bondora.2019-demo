@@ -11,11 +11,11 @@ namespace bondora.homeAssignment.Web.Controllers
 
         public ProductsController(IProductsService productsService) => this.productsService = productsService;
 
-        public async Task<IActionResult> Index() => this.View(await this.productsService.List());
+        public async Task<IActionResult> Index() => this.View(await this.productsService.List().ConfigureAwait(false));
 
         public async Task<IActionResult> Details(long id)
         {
-            var product = await this.productsService.Get(id);
+            var product = await this.productsService.Get(id).ConfigureAwait(false);
             if (product == null)
             {
                 return this.NotFound();

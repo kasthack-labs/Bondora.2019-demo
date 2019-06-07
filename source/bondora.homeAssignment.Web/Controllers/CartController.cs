@@ -9,12 +9,9 @@ namespace bondora.homeAssignment.Web.Controllers
     {
         private readonly ICartService cartService;
 
-        public CartController(ICartService cartService)
-        {
-            this.cartService = cartService;
-        }
+        public CartController(ICartService cartService) => this.cartService = cartService;
 
-        public async Task<IActionResult> Index(int page = 1) => this.View(await this.cartService.List());
+        public async Task<IActionResult> Index() => this.View(await this.cartService.List().ConfigureAwait(false));
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -22,9 +19,9 @@ namespace bondora.homeAssignment.Web.Controllers
         {
             if (this.ModelState.IsValid)
             {
-                await this.cartService.Create(contract);
+                await this.cartService.Create(contract).ConfigureAwait(false);
             }
-            return RedirectToAction(nameof(Index));
+            return this.RedirectToAction(nameof(Index));
         }
 
         [HttpPost]
@@ -33,23 +30,23 @@ namespace bondora.homeAssignment.Web.Controllers
         {
             if (id != cartItem.Id)
             {
-                return NotFound();
+                return this.NotFound();
             }
 
-            if (ModelState.IsValid)
+            if (this.ModelState.IsValid)
             {
-                await this.cartService.Update(cartItem);
-                return RedirectToAction(nameof(Index));
+                await this.cartService.Update(cartItem).ConfigureAwait(false);
+                return this.RedirectToAction(nameof(Index));
             }
-            return View(cartItem);
+            return this.View(cartItem);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(long id)
         {
-            await this.cartService.Delete(id);
-            return RedirectToAction(nameof(Index));
+            await this.cartService.Delete(id).ConfigureAwait(false);
+            return this.RedirectToAction(nameof(Index));
         }
     }
 }

@@ -26,7 +26,7 @@ namespace bondora.homeAssignment.Core.Services.Impl
 
         public async Task<ProductContract> Get(long id)
         {
-            var product = await this.cache.GetProduct(id);
+            var product = await this.cache.GetProduct(id).ConfigureAwait(false);
             if (product != null)
             {
                 return product;
@@ -36,16 +36,17 @@ namespace bondora.homeAssignment.Core.Services.Impl
                 product = await context.Products
                 .Where(m => m.Id == id)
                 .ProjectTo<ProductContract>(this.configurationProvider)
-                .FirstOrDefaultAsync();
+                .FirstOrDefaultAsync()
+                .ConfigureAwait(false);
             }
-            await this.cache.SetProduct(product);
+            await this.cache.SetProduct(product).ConfigureAwait(false);
 
             return product;
         }
 
         public async Task<IEnumerable<ProductContract>> List()
         {
-            var products = await this.cache.GetProducts();
+            var products = await this.cache.GetProducts().ConfigureAwait(false);
             if (products != null)
             {
                 return products;
@@ -56,9 +57,10 @@ namespace bondora.homeAssignment.Core.Services.Impl
                 products = await context
                 .Products
                 .ProjectTo<ProductContract>(this.configurationProvider)
-                .ToListAsync();
+                .ToListAsync()
+                .ConfigureAwait(false);
             }
-            await this.cache.SetProducts(products);
+            await this.cache.SetProducts(products).ConfigureAwait(false);
 
             return products;
         }

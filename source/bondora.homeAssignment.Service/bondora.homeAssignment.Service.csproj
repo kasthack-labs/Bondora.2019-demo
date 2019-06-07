@@ -17,5 +17,6 @@
 
   <ItemGroup>
     <ProjectReference Include="../bondora.homeAssignment.Core/bondora.homeAssignment.Core.csproj"/>
+    <ProjectReference Include="../bondora.homeAssignment.Api/bondora.homeAssignment.Api.csproj"/>
   </ItemGroup>
 </Project>

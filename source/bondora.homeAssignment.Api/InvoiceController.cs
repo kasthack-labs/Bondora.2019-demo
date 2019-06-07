@@ -11,9 +11,7 @@ namespace bondora.homeAssignment.Api
     {
         private readonly IInvoiceService invoiceService;
 
-        public InvoiceController(IInvoiceService invoceService) {
-            this.invoiceService = invoceService;
-        }
+        public InvoiceController(IInvoiceService invoceService) => this.invoiceService = invoceService;
 
         [HttpGet]
         public Task<InvoiceContract> GetInvoice() => this.invoiceService.GetInvoice();
@@ -21,7 +19,7 @@ namespace bondora.homeAssignment.Api
         [HttpGet]
         public async Task<ActionResult> GetPrintedInvoice()
         {
-            var invoice = await this.invoiceService.GetPrintedInvoice();
+            var invoice = await this.invoiceService.GetPrintedInvoice().ConfigureAwait(false);
             return this.File(invoice.Content, invoice.Mime, invoice.Name);
         }
     }

@@ -25,7 +25,7 @@ namespace bondora.homeAssignment.Core.Services.Impl
             var invoice = new InvoiceContract
             {
                 Title = $"Equipment rental invoice {DateTimeOffset.Now:yyyy-MM-dd hh:MMZ}",
-                Items = await this.cartService.List(),
+                Items = await this.cartService.List().ConfigureAwait(false),
             };
             this.logger.LogDebug($"Generated invoice '{invoice.Title}' with {invoice.Items.Count()} items of equipment totaling for {invoice.Price} EUR");
             return invoice;
@@ -33,7 +33,7 @@ namespace bondora.homeAssignment.Core.Services.Impl
 
         public async Task<DocumentContract> GetPrintedInvoice()
         {
-            var model = await this.GetInvoice();
+            var model = await this.GetInvoice().ConfigureAwait(false);
             var currency = Currency.CurrencySymbol;
             var formattedItems = model.Items.Select(item => new {
                 Name = item.Product.Name,

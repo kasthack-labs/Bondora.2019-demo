@@ -1,7 +1,6 @@
 using System.Reflection;
 using bondora.homeAssignment.ApiClient.Api;
 using bondora.homeAssignment.Core.Services.Contracts;
-using bondora.homeAssignment.Data;
 using bondora.homeAssignment.Web.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -14,22 +13,15 @@ namespace bondora.homeAssignment.Web
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
-        {
-            this.Configuration = configuration;
-        }
+        public Startup(IConfiguration configuration) => this.Configuration = configuration;
 
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
-            services.Configure<CookiePolicyOptions>(options =>
-            {
-                options.CheckConsentNeeded = context => true;
-            });
-            var apiRoot = "localhost";
+            services.Configure<CookiePolicyOptions>(options => options.CheckConsentNeeded = context => true);
+            var apiRoot = "http://localhost:31337/";
             services
                 .AddSingleton<IInvoiceApi>(cfg => new InvoiceApi(apiRoot))
                 .AddSingleton<IUserCartApi>(cfg => new UserCartApi(apiRoot))
@@ -56,7 +48,6 @@ namespace bondora.homeAssignment.Web
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -74,10 +65,8 @@ namespace bondora.homeAssignment.Web
                 .UseCookiePolicy()
                 .UseRouting()
                 .UseAuthorization()
-                .UseSwagger().UseSwaggerUI(c =>
-                {
-                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Equimpent rental API V1");
-                })
+                .UseSwagger()
+                .UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Equimpent rental API V1"))
                 .UseEndpoints(endpoints =>
                 {
                     endpoints.MapControllerRoute(

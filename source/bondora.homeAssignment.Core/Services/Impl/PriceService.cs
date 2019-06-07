@@ -8,20 +8,17 @@ using System.Threading.Tasks;
 
 namespace bondora.homeAssignment.Core.Services.Impl
 {
-
     public class PriceService : IPriceService
     {
         private readonly Func<DemoAppContext> contextFactory;
 
-        public PriceService(Func<DemoAppContext> contextFactory)
-        {
-            this.contextFactory = contextFactory;
-        }
+        public PriceService(Func<DemoAppContext> contextFactory) => this.contextFactory = contextFactory;
+
         public async Task<Dictionary<string, double>> GetPrices()
         {
             using (var context = this.contextFactory())
             {
-                return (await context.Prices.ToArrayAsync()).ToDictionary(a => a.Name, a => (double)a.Value);
+                return (await context.Prices.ToArrayAsync().ConfigureAwait(false)).ToDictionary(a => a.Name, a => (double)a.Value);
             }
         }
     }

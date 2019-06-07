@@ -24,13 +24,13 @@ namespace bondora.homeAssignment.Core.Services.Impl
             new DistributedCacheEntryOptions
             {
                 AbsoluteExpirationRelativeToNow = duration
-            });
+            }).ConfigureAwait(false);
 
-        public async Task Remove(string key) => await this.distrubutedCache.RemoveAsync(key);
+        public async Task Remove(string key) => await this.distrubutedCache.RemoveAsync(key).ConfigureAwait(false);
 
         public async Task<T> Get<T>(string key)
         {
-            var value = await this.distrubutedCache.GetStringAsync(key);
+            var value = await this.distrubutedCache.GetStringAsync(key).ConfigureAwait(false);
             if (value == null)
             {
                 return default;

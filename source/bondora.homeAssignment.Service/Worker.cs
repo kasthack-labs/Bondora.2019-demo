@@ -22,8 +22,8 @@ namespace bondora.homeAssignment.Service
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
             this.logger.LogInformation("Started background service");
-            await this.context.Database.MigrateAsync();
-            await Task.Delay(Timeout.Infinite, stoppingToken);
+            await this.context.Database.MigrateAsync().ConfigureAwait(false);
+            await Task.Delay(Timeout.Infinite, stoppingToken).ConfigureAwait(false);
             this.logger.LogInformation("Cancellation requested");
         }
     }
