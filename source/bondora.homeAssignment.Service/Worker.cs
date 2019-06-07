@@ -1,6 +1,8 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using bondora.homeAssignment.Data;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
@@ -8,20 +10,21 @@ namespace bondora.homeAssignment.Service
 {
     public class Worker : BackgroundService
     {
-        private readonly ILogger<Worker> _logger;
+        private readonly ILogger<Worker> logger;
+        private readonly DemoAppContext context;
 
-        public Worker(ILogger<Worker> logger)
+        public Worker(ILogger<Worker> logger, DemoAppContext context)
         {
-            this._logger = logger;
+            this.logger = logger;
+            this.context = context;
         }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            while (!stoppingToken.IsCancellationRequested)
-            {
-                this._logger.LogInformation("Worker running at: {time}", DateTimeOffset.Now);
-                await Task.Delay(1000, stoppingToken);
-            }
+            this.logger.LogInformation("Started background service");
+            await this.context.Database.MigrateAsync();
+            await Task.Delay(Timeout.Infinite, stoppingToken);
+            this.logger.LogInformation("Cancellation requested");
         }
     }
 }

@@ -1,9 +1,8 @@
-using System;
 using System.Reflection;
-using AutoMapper;
-using bondora.homeAssignment.Core;
+using bondora.homeAssignment.ApiClient.Api;
 using bondora.homeAssignment.Core.Services.Contracts;
 using bondora.homeAssignment.Data;
+using bondora.homeAssignment.Web.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -30,6 +29,16 @@ namespace bondora.homeAssignment.Web
             {
                 options.CheckConsentNeeded = context => true;
             });
+            var apiRoot = "localhost";
+            services
+                .AddSingleton<IInvoiceApi>(cfg => new InvoiceApi(apiRoot))
+                .AddSingleton<IUserCartApi>(cfg => new UserCartApi(apiRoot))
+                .AddSingleton<IProductApi>(cfg => new ProductApi(apiRoot))
+
+                .AddSingleton<IProductsService, RemoteProductsService>()
+                .AddSingleton<ICartService, RemoteCartService>()
+                .AddSingleton<IInvoiceService, RemoteInvoiceService>()
+                ;
 
             services
                 .AddSwaggerGen(c => c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "Equimpent rental API V1", Version = "v1" }));
@@ -47,10 +56,6 @@ namespace bondora.homeAssignment.Web
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            using (var context = new DemoAppContext())
-            {
-                context.Database.Migrate();
-            }
 
             if (env.IsDevelopment())
             {

@@ -17,17 +17,16 @@
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="3.0.0-preview5.19227.9" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.7.9" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.0.0-preview5-19264-04" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="3.0.0-preview5.19227.9"/>
-    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="3.0.0-preview5.19227.9"/>
-    <PackageReference Include="Microsoft.Extensions.Logging.EventSource" Version="3.0.0-preview5.19227.9"/>
+    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="3.0.0-preview5.19227.9" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="3.0.0-preview5.19227.9" />
+    <PackageReference Include="Microsoft.Extensions.Logging.EventSource" Version="3.0.0-preview5.19227.9" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.0.0-rc2" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="../bondora.homeAssignment.Api/bondora.homeAssignment.Api.csproj" />
     <ProjectReference Include="../bondora.homeAssignment.Core.Contracts/bondora.homeAssignment.Core.Contracts.csproj" />
-
-    <ProjectReference Include="../bondora.homeAssignment.Data/bondora.homeAssignment.Data.csproj" />
+    <ProjectReference Include="../bondora.homeAssignment.ApiClient/bondora.homeAssignment.ApiClient.csproj"/>
   </ItemGroup>
 
 </Project>
