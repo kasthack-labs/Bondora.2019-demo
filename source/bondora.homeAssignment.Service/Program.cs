@@ -22,6 +22,7 @@ namespace bondora.homeAssignment.Service
                 .ConfigureWebHostDefaults(webBuilder => webBuilder
                     .UseStartup<Startup>()
                     .ConfigureKestrel(opts => opts.ListenAnyIP(31337)))
+                //.Confi
                 .Build();
             var serviceBuilder = CreateHostBuilder(args).ConfigureServices(services => services.AddHostedService<Worker>());
             await Task.WhenAll(
@@ -62,6 +63,11 @@ namespace bondora.homeAssignment.Service
             .AddApplicationPart(Assembly.Load("bondora.homeAssignment.Api"))
             .AddControllersAsServices();
 
-        public void Configure(IApplicationBuilder app) => app.UseStaticFiles().UseRouting();
+        public void Configure(IApplicationBuilder app) => app
+            .UseStaticFiles()
+            .UseRouting()
+            .UseEndpoints(cfg=> {
+                cfg.MapControllers();
+            });
     }
 }

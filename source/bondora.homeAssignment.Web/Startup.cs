@@ -39,7 +39,8 @@ namespace bondora.homeAssignment.Web
                 .AddMvc()
                 .AddApplicationPart(Assembly.Load("bondora.homeAssignment.Api"))
                 .AddControllersAsServices()
-                .AddNewtonsoftJson();
+                .AddNewtonsoftJson()
+                ;
 
             services.AddControllersWithViews();
             services.AddRazorPages();
