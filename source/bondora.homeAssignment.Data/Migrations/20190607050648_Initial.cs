@@ -7,7 +7,22 @@ namespace bondora.homeAssignment.Data.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "BonusPoints",
+                name: "Categories",
+                columns: table => new
+                {
+                    Id = table.Column<long>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Deleted = table.Column<bool>(nullable: false),
+                    Name = table.Column<string>(nullable: true),
+                    PricingFormula = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Categories", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "LoyaltyPrograms",
                 columns: table => new
                 {
                     Id = table.Column<long>(nullable: false)
@@ -18,7 +33,7 @@ namespace bondora.homeAssignment.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_BonusPoints", x => x.Id);
+                    table.PrimaryKey("PK_LoyaltyPrograms", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -37,63 +52,6 @@ namespace bondora.homeAssignment.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ProductCategories",
-                columns: table => new
-                {
-                    Id = table.Column<long>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Deleted = table.Column<bool>(nullable: false),
-                    Name = table.Column<string>(nullable: true),
-                    PricingFormula = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ProductCategories", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Users",
-                columns: table => new
-                {
-                    Id = table.Column<long>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Deleted = table.Column<bool>(nullable: false),
-                    Name = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Users", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "CategoryBonusPoints",
-                columns: table => new
-                {
-                    Id = table.Column<long>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Deleted = table.Column<bool>(nullable: false),
-                    BonusPointsId = table.Column<long>(nullable: false),
-                    ProductCategoryId = table.Column<long>(nullable: false),
-                    BonusPointId = table.Column<long>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_CategoryBonusPoints", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_CategoryBonusPoints_BonusPoints_BonusPointId",
-                        column: x => x.BonusPointId,
-                        principalTable: "BonusPoints",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_CategoryBonusPoints_ProductCategories_ProductCategoryId",
-                        column: x => x.ProductCategoryId,
-                        principalTable: "ProductCategories",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Products",
                 columns: table => new
                 {
@@ -108,9 +66,36 @@ namespace bondora.homeAssignment.Data.Migrations
                 {
                     table.PrimaryKey("PK_Products", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Products_ProductCategories_CategoryId",
+                        name: "FK_Products_Categories_CategoryId",
                         column: x => x.CategoryId,
-                        principalTable: "ProductCategories",
+                        principalTable: "Categories",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CategoryLoyaltyPrograms",
+                columns: table => new
+                {
+                    Id = table.Column<long>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Deleted = table.Column<bool>(nullable: false),
+                    CategoryId = table.Column<long>(nullable: false),
+                    LoyaltyProgramId = table.Column<long>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CategoryLoyaltyPrograms", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_CategoryLoyaltyPrograms_Categories_CategoryId",
+                        column: x => x.CategoryId,
+                        principalTable: "Categories",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_CategoryLoyaltyPrograms_LoyaltyPrograms_LoyaltyProgramId",
+                        column: x => x.LoyaltyProgramId,
+                        principalTable: "LoyaltyPrograms",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -122,8 +107,7 @@ namespace bondora.homeAssignment.Data.Migrations
                     Id = table.Column<long>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Deleted = table.Column<bool>(nullable: false),
-                    Amount = table.Column<int>(nullable: false),
-                    UserId = table.Column<long>(nullable: false),
+                    Duration = table.Column<int>(nullable: false),
                     ProductId = table.Column<long>(nullable: false)
                 },
                 constraints: table =>
@@ -135,21 +119,30 @@ namespace bondora.homeAssignment.Data.Migrations
                         principalTable: "Products",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_CartItems_Users_UserId",
-                        column: x => x.UserId,
-                        principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.InsertData(
-                table: "BonusPoints",
+                table: "Categories",
+                columns: new[] { "Id", "Deleted", "Name", "PricingFormula" },
+                values: new object[] { 1L, false, "Heavy equipment", "OneTime + Premium * duration" });
+
+            migrationBuilder.InsertData(
+                table: "Categories",
+                columns: new[] { "Id", "Deleted", "Name", "PricingFormula" },
+                values: new object[] { 2L, false, "Regular equipment", "OneTime + min(duration, 2) * Premium + max(0, duration - 2) * Regular" });
+
+            migrationBuilder.InsertData(
+                table: "Categories",
+                columns: new[] { "Id", "Deleted", "Name", "PricingFormula" },
+                values: new object[] { 3L, false, "Specialized equipment", "min(duration, 3) * Premium + max(0, duration - 3) * Regular" });
+
+            migrationBuilder.InsertData(
+                table: "LoyaltyPrograms",
                 columns: new[] { "Id", "Deleted", "Formula", "Name" },
                 values: new object[] { 1L, false, "1", "Regular bonus program" });
 
             migrationBuilder.InsertData(
-                table: "BonusPoints",
+                table: "LoyaltyPrograms",
                 columns: new[] { "Id", "Deleted", "Formula", "Name" },
                 values: new object[] { 2L, false, "2", "Heavy equipment bonus program" });
 
@@ -169,34 +162,19 @@ namespace bondora.homeAssignment.Data.Migrations
                 values: new object[] { 3L, false, "Premium", 100m });
 
             migrationBuilder.InsertData(
-                table: "ProductCategories",
-                columns: new[] { "Id", "Deleted", "Name", "PricingFormula" },
-                values: new object[] { 1L, false, "Heavy equipment", "OneTime + Premium * duration" });
+                table: "CategoryLoyaltyPrograms",
+                columns: new[] { "Id", "CategoryId", "Deleted", "LoyaltyProgramId" },
+                values: new object[] { 2L, 2L, false, 1L });
 
             migrationBuilder.InsertData(
-                table: "ProductCategories",
-                columns: new[] { "Id", "Deleted", "Name", "PricingFormula" },
-                values: new object[] { 2L, false, "Regular equipment", "OneTime + min(duration, 2) * Premium + max(0, duration - 2) * Regular" });
+                table: "CategoryLoyaltyPrograms",
+                columns: new[] { "Id", "CategoryId", "Deleted", "LoyaltyProgramId" },
+                values: new object[] { 3L, 3L, false, 1L });
 
             migrationBuilder.InsertData(
-                table: "ProductCategories",
-                columns: new[] { "Id", "Deleted", "Name", "PricingFormula" },
-                values: new object[] { 3L, false, "Specialized equipment", "min(duration, 3) * Premium + max(0, duration - 3) * Regular" });
-
-            migrationBuilder.InsertData(
-                table: "CategoryBonusPoints",
-                columns: new[] { "Id", "BonusPointId", "BonusPointsId", "Deleted", "ProductCategoryId" },
-                values: new object[] { 1L, null, 2L, false, 1L });
-
-            migrationBuilder.InsertData(
-                table: "CategoryBonusPoints",
-                columns: new[] { "Id", "BonusPointId", "BonusPointsId", "Deleted", "ProductCategoryId" },
-                values: new object[] { 2L, null, 1L, false, 2L });
-
-            migrationBuilder.InsertData(
-                table: "CategoryBonusPoints",
-                columns: new[] { "Id", "BonusPointId", "BonusPointsId", "Deleted", "ProductCategoryId" },
-                values: new object[] { 3L, null, 1L, false, 3L });
+                table: "CategoryLoyaltyPrograms",
+                columns: new[] { "Id", "CategoryId", "Deleted", "LoyaltyProgramId" },
+                values: new object[] { 1L, 1L, false, 2L });
 
             migrationBuilder.InsertData(
                 table: "Products",
@@ -229,20 +207,15 @@ namespace bondora.homeAssignment.Data.Migrations
                 column: "ProductId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CartItems_UserId",
-                table: "CartItems",
-                column: "UserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_CategoryBonusPoints_BonusPointId",
-                table: "CategoryBonusPoints",
-                column: "BonusPointId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_CategoryBonusPoints_ProductCategoryId",
-                table: "CategoryBonusPoints",
-                column: "ProductCategoryId",
+                name: "IX_CategoryLoyaltyPrograms_CategoryId",
+                table: "CategoryLoyaltyPrograms",
+                column: "CategoryId",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CategoryLoyaltyPrograms_LoyaltyProgramId",
+                table: "CategoryLoyaltyPrograms",
+                column: "LoyaltyProgramId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Products_CategoryId",
@@ -256,7 +229,7 @@ namespace bondora.homeAssignment.Data.Migrations
                 name: "CartItems");
 
             migrationBuilder.DropTable(
-                name: "CategoryBonusPoints");
+                name: "CategoryLoyaltyPrograms");
 
             migrationBuilder.DropTable(
                 name: "Prices");
@@ -265,13 +238,10 @@ namespace bondora.homeAssignment.Data.Migrations
                 name: "Products");
 
             migrationBuilder.DropTable(
-                name: "Users");
+                name: "LoyaltyPrograms");
 
             migrationBuilder.DropTable(
-                name: "BonusPoints");
-
-            migrationBuilder.DropTable(
-                name: "ProductCategories");
+                name: "Categories");
         }
     }
 }

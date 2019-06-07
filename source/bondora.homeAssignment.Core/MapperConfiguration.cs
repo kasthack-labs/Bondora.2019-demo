@@ -1,7 +1,8 @@
 ﻿using AutoMapper;
 using bondora.homeAssignment.Data;
-using bondora.homeAssignment.Models.DTO;
-using bondora.homeAssignment.Models.DTO.CartItem;
+using bondora.homeAssignment.Models.Contracts.Cart;
+using bondora.homeAssignment.Models.Contracts.Category;
+using bondora.homeAssignment.Models.Contracts.Product;
 
 namespace bondora.homeAssignment.Core
 {
@@ -9,9 +10,12 @@ namespace bondora.homeAssignment.Core
     {
         public MappingProfile()
         {
-            this.CreateMap<Category, CategoryContract>().ReverseMap();
+            this.CreateMap<Category, CategoryContract>()
+                .ForMember(a=>a.LoyaltyFormula, cfg => cfg.MapFrom(source => source.CategoryLoyaltyProgram.LoyaltyProgram.Formula))
+                .ReverseMap();
             this.CreateMap<Product, ProductContract>().ReverseMap();
             this.CreateMap<CartItem, CartItemContract>().ReverseMap();
+
             this.CreateMap<CreateCartItemContract, CartItem>();
             this.CreateMap<UpdateCartItemContract, CartItem>();
         }

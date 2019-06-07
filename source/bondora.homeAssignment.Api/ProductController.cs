@@ -1,5 +1,5 @@
 ﻿using bondora.homeAssignment.Core.Services.Contracts;
-using bondora.homeAssignment.Models.DTO;
+using bondora.homeAssignment.Models.Contracts.Product;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -15,7 +15,7 @@ namespace bondora.homeAssignment.Api
         public ProductController(IProductsService productsService) => this.productsService = productsService;
 
         [HttpGet]
-        public async Task<IEnumerable<ProductContract>> GetProducts(int page) => await this.productsService.List(page);
+        public async Task<IEnumerable<ProductContract>> GetProducts() => await this.productsService.List();
 
         [HttpGet]
         public async Task<ProductContract> GetProduct(long id) => await this.productsService.Get(id);

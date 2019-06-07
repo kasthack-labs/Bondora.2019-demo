@@ -1,4 +1,6 @@
-﻿namespace bondora.homeAssignment.Models.DTO
+﻿using bondora.homeAssignment.Models.Contracts.Category;
+
+namespace bondora.homeAssignment.Models.Contracts.Product
 {
     public class ProductContract
     {

@@ -1,6 +1,5 @@
 ﻿using System.Threading.Tasks;
-using bondora.homeAssignment.Models.DTO;
-using bondora.homeAssignment.Models.DTO.CartItem;
+using bondora.homeAssignment.Models.Contracts.Cart;
 
 namespace bondora.homeAssignment.Core.Services.Contracts
 {

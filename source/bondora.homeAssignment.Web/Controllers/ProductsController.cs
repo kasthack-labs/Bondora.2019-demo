@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using bondora.homeAssignment.Core.Services.Contracts;
+using bondora.homeAssignment.Models.Contracts.Cart;
 
 namespace bondora.homeAssignment.Web.Controllers
 {
@@ -10,7 +11,7 @@ namespace bondora.homeAssignment.Web.Controllers
 
         public ProductsController(IProductsService productsService) => this.productsService = productsService;
 
-        public async Task<IActionResult> Index(int? page = null) => this.View(await this.productsService.List((int)(page ?? 1)));
+        public async Task<IActionResult> Index() => this.View(await this.productsService.List());
 
         public async Task<IActionResult> Details(long id)
         {
@@ -19,7 +20,12 @@ namespace bondora.homeAssignment.Web.Controllers
             {
                 return this.NotFound();
             }
-            return this.View(product);
+            //dirty hack for simple validation
+            return this.View(new CartItemContract
+            {
+                Product = product,
+                Duration = 7
+            });
         }
     }
 }

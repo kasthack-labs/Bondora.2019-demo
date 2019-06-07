@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bondora.homeAssignment.Core
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "bondora.homeAssignment.Api", "bondora.homeAssignment.Api\bondora.homeAssignment.Api.csproj", "{DF9E017E-1C5E-45DA-A59A-5B9676F774B1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bondora.homeAssignment.Core.Contracts", "bondora.homeAssignment.Core.Contracts\bondora.homeAssignment.Core.Contracts.csproj", "{61053BF3-B0E8-47B1-B0C4-059D8B30333B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{DF9E017E-1C5E-45DA-A59A-5B9676F774B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DF9E017E-1C5E-45DA-A59A-5B9676F774B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DF9E017E-1C5E-45DA-A59A-5B9676F774B1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{61053BF3-B0E8-47B1-B0C4-059D8B30333B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61053BF3-B0E8-47B1-B0C4-059D8B30333B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61053BF3-B0E8-47B1-B0C4-059D8B30333B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61053BF3-B0E8-47B1-B0C4-059D8B30333B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

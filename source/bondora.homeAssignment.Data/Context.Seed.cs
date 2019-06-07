@@ -76,22 +76,22 @@ namespace bondora.homeAssignment.Data
                 {
                     Id = 1,
                     Deleted = false,
-                    BonusPointsId = 2,
-                    ProductCategoryId = 1,
+                    LoyaltyProgramId = 2,
+                    CategoryId = 1,
                 },
                 new CategoryLoyaltyProgram
                 {
                     Id = 2,
                     Deleted = false,
-                    BonusPointsId = 1,
-                    ProductCategoryId = 2,
+                    LoyaltyProgramId = 1,
+                    CategoryId = 2,
                 },
                 new CategoryLoyaltyProgram
                 {
                     Id = 3,
                     Deleted = false,
-                    BonusPointsId = 1,
-                    ProductCategoryId = 3,
+                    LoyaltyProgramId = 1,
+                    CategoryId = 3,
                 }
             );
 

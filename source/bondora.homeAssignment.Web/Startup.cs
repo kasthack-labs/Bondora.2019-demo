@@ -1,8 +1,8 @@
+using System;
 using System.Reflection;
 using AutoMapper;
 using bondora.homeAssignment.Core;
 using bondora.homeAssignment.Core.Services.Contracts;
-using bondora.homeAssignment.Core.Services.Impl;
 using bondora.homeAssignment.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -22,7 +22,6 @@ namespace bondora.homeAssignment.Web
 
         public IConfiguration Configuration { get; }
 
-
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
@@ -33,15 +32,6 @@ namespace bondora.homeAssignment.Web
             });
 
             services
-                .AddTransient<IProductsService, ProductsService>()
-                .AddTransient<ICategoryService, CategoryService>()
-                .AddTransient<IUserIdProvider, MockUserIdProvider>()
-                .AddTransient<ICartService, CartService>();
-
-            services
-                .AddDbContext<DemoAppContext>()
-                .AddAutoMapper(cfg => cfg.AddProfile(new MappingProfile()))
-                .AddDistributedMemoryCache()
                 .AddSwaggerGen(c => c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "Equimpent rental API V1", Version = "v1" }));
 
             services
@@ -61,6 +51,7 @@ namespace bondora.homeAssignment.Web
             {
                 context.Database.Migrate();
             }
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

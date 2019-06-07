@@ -1,4 +1,4 @@
-﻿using bondora.homeAssignment.Models.DTO;
+﻿using bondora.homeAssignment.Models.Contracts.Product;
 
 namespace bondora.homeAssignment.Core.Services.Contracts
 {

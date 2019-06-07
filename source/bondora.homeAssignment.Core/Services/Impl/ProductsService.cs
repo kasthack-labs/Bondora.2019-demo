@@ -6,39 +6,60 @@ using bondora.homeAssignment.Data;
 using bondora.homeAssignment.Core.Services.Contracts;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
-using bondora.homeAssignment.Models.DTO;
+using bondora.homeAssignment.Models.Contracts.Product;
+using System;
 
 namespace bondora.homeAssignment.Core.Services.Impl
 {
     public class ProductsService : IProductsService
     {
-        private readonly DemoAppContext context;
+        private readonly Func<DemoAppContext> contextFactory;
         private readonly IConfigurationProvider configurationProvider;
+        private readonly IProductCacheService cache;
 
-        public ProductsService(DemoAppContext context, IConfigurationProvider configurationProvider)
+        public ProductsService(Func<DemoAppContext> contextFactory, IProductCacheService cache, IConfigurationProvider configurationProvider)
         {
-            this.context = context;
+            this.contextFactory = contextFactory;
             this.configurationProvider = configurationProvider;
+            this.cache = cache;
         }
 
         public async Task<ProductContract> Get(long id)
         {
-            var product = await this.context.Products
+            var product = await this.cache.GetProduct(id);
+            if (product != null)
+            {
+                return product;
+            }
+            using (var context = this.contextFactory())
+            {
+                product = await context.Products
                 .Where(m => m.Id == id)
                 .ProjectTo<ProductContract>(this.configurationProvider)
                 .FirstOrDefaultAsync();
+            }
+            await this.cache.SetProduct(product);
+
             return product;
         }
 
-        public async Task<IEnumerable<ProductContract>> List(int page)
+        public async Task<IEnumerable<ProductContract>> List()
         {
-            var pageSize = 10;
-            var products = await this.context
+            var products = await this.cache.GetProducts();
+            if (products != null)
+            {
+                return products;
+            }
+
+            using (var context = this.contextFactory())
+            {
+                products = await context
                 .Products
-                .Skip((page - 1) * pageSize)
-                .Take(pageSize)
                 .ProjectTo<ProductContract>(this.configurationProvider)
                 .ToListAsync();
+            }
+            await this.cache.SetProducts(products);
+
             return products;
         }
     }

@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using bondora.homeAssignment.Core.Services.Contracts;
-using bondora.homeAssignment.Models.DTO.CartItem;
+using bondora.homeAssignment.Models.Contracts.Cart;
 
 namespace bondora.homeAssignment.Web.Controllers
 {
@@ -14,12 +14,8 @@ namespace bondora.homeAssignment.Web.Controllers
             this.cartService = cartService;
         }
 
-        // GET: Cart
-        public async Task<IActionResult> Index(int page = 1) => this.View(await this.cartService.List(page));
+        public async Task<IActionResult> Index(int page = 1) => this.View(await this.cartService.List());
 
-        // POST: Cart/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(CreateCartItemContract contract)
@@ -48,20 +44,9 @@ namespace bondora.homeAssignment.Web.Controllers
             return View(cartItem);
         }
 
-        // GET: Cart/Delete/5
-        public async Task<IActionResult> Delete(long id)
-        {
-            var model = await this.cartService.Get(id);
-            if (model == null)
-            {
-                return NotFound();
-            }
-            return View(model);
-        }
-
-        [HttpPost, ActionName(nameof(Delete))]
+        [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(long id)
+        public async Task<IActionResult> Delete(long id)
         {
             await this.cartService.Delete(id);
             return RedirectToAction(nameof(Index));
